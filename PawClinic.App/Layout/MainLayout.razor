@@ -1,0 +1,21 @@
+﻿@inherits LayoutComponentBase
+
+<div class="container-fluid">
+    <header class="py-3 mb-3 border-bottom">
+        <h1 class="h4 mb-0">PawClinic</h1>
+    </header>
+
+    <div class="d-flex">
+        <NavMenu />
+
+        <div class="content flex-grow-1 p-3">
+            @Body
+        </div>
+    </div>
+</div>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">x</a>
+</div>

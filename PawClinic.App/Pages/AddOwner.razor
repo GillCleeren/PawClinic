@@ -1,0 +1,41 @@
+@page "/owners/add"
+
+<h3>Register New Owner</h3>
+
+<br />
+
+<div class="row">
+    <div class="card col-12 col-lg-6 p-3">
+        <div class="card-body">
+            <EditForm Model="@OwnerViewModel" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <div class="mb-3">
+                    <label class="form-label" for="name">Name:</label>
+                    <InputText id="name" class="form-control" @bind-Value="OwnerViewModel.Name" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="email">Email:</label>
+                    <InputText id="email" class="form-control" @bind-Value="OwnerViewModel.Email" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="phone">Phone Number:</label>
+                    <InputText id="phone" class="form-control" @bind-Value="OwnerViewModel.PhoneNumber" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="address">Address:</label>
+                    <InputText id="address" class="form-control" @bind-Value="OwnerViewModel.Address" />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Register Owner</button>
+                <a href="/owners" class="btn btn-secondary ms-2">Cancel</a>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(Message))
+{
+    <div class="alert alert-danger mt-3">@Message</div>
+}

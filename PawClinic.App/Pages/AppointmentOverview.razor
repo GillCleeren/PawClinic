@@ -1,0 +1,40 @@
+@page "/appointments"
+
+<h3>Upcoming Appointments</h3>
+
+<br />
+
+@if (Appointments == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!Appointments.Any())
+{
+    <p>No upcoming appointments found.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date &amp; Time</th>
+                <th>Pet</th>
+                <th>Vet</th>
+                <th>Reason</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var appt in Appointments)
+            {
+                <tr>
+                    <td>@appt.ScheduledDateTime.ToString("g")</td>
+                    <td>@appt.PetName</td>
+                    <td>@appt.VetName</td>
+                    <td>@appt.ReasonForVisit</td>
+                    <td>@appt.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,52 @@
+@page "/register"
+
+<div class="mt-5 row">
+    <div class="card col-12 col-lg-6 me-auto ms-auto p-3">
+        <h3 class="card-title">Register for PawClinic</h3>
+        <div class="card-body">
+            <EditForm Model="@RegisterViewModel" OnValidSubmit="HandleValidSubmit">
+                <div class="row mt-2">
+                    <label class="col-12 col-md-4 p-0 form-label" for="firstName">First Name:</label>
+                    <div class="col-12 col-md-8">
+                        <InputText id="firstName" class="form-control" @bind-Value="RegisterViewModel.FirstName" />
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <label class="col-12 col-md-4 p-0 form-label" for="lastName">Last Name:</label>
+                    <div class="col-12 col-md-8">
+                        <InputText id="lastName" class="form-control" @bind-Value="RegisterViewModel.LastName" />
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <label class="col-12 col-md-4 p-0 form-label" for="userName">Username:</label>
+                    <div class="col-12 col-md-8">
+                        <InputText id="userName" class="form-control" @bind-Value="RegisterViewModel.UserName" />
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <label class="col-12 col-md-4 p-0 form-label" for="email">Email:</label>
+                    <div class="col-12 col-md-8">
+                        <InputText id="email" class="form-control" @bind-Value="RegisterViewModel.Email" />
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <label class="col-12 col-md-4 p-0 form-label" for="password">Password:</label>
+                    <div class="col-12 col-md-8">
+                        <InputText type="password" id="password" class="form-control" @bind-Value="RegisterViewModel.Password" />
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="offset-md-4">
+                        <button class="btn btn-primary m-2 ms-0">Register</button>
+                        <a href="/login" class="btn btn-link">Already have an account?</a>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(Message))
+{
+    <div class="alert alert-danger mt-3 text-center">@Message</div>
+}

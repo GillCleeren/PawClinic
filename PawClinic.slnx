@@ -1,0 +1,12 @@
+<Solution>
+  <Project Path="PawClinic.Api.IntegrationTests/PawClinic.Api.IntegrationTests.csproj" />
+  <Project Path="PawClinic.Api/PawClinic.Api.csproj" />
+  <Project Path="PawClinic.App/PawClinic.App.csproj" />
+  <Project Path="PawClinic.Application.UnitTests/PawClinic.Application.UnitTests.csproj" />
+  <Project Path="PawClinic.Application/PawClinic.Application.csproj" />
+  <Project Path="PawClinic.Domain/PawClinic.Domain.csproj" />
+  <Project Path="PawClinic.Identity/PawClinic.Identity.csproj" />
+  <Project Path="PawClinic.Infrastructure/PawClinic.Infrastructure.csproj" />
+  <Project Path="PawClinic.Persistence.IntegrationTests/PawClinic.Persistence.IntegrationTests.csproj" />
+  <Project Path="PawClinic.Persistence/PawClinic.Persistence.csproj" />
+</Solution>

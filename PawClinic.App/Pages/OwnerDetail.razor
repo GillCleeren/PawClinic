@@ -1,0 +1,52 @@
+@page "/owners/{OwnerId:guid}"
+
+<h3>Owner Detail</h3>
+
+<br />
+
+@if (Owner == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">@Owner.Name</h5>
+            <p class="card-text"><strong>Email:</strong> @Owner.Email</p>
+            <p class="card-text"><strong>Phone:</strong> @Owner.PhoneNumber</p>
+            <p class="card-text"><strong>Address:</strong> @Owner.Address</p>
+        </div>
+    </div>
+
+    <h4>Pets</h4>
+
+    @if (!Pets.Any())
+    {
+        <p>No pets registered for this owner.</p>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Species</th>
+                    <th>Breed</th>
+                    <th>Archived</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pet in Pets)
+                {
+                    <tr>
+                        <td>@pet.Name</td>
+                        <td>@pet.Species</td>
+                        <td>@pet.Breed</td>
+                        <td>@(pet.IsArchived ? "Yes" : "No")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
