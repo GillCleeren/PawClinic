@@ -45,7 +45,7 @@ public class OwnerDataService : BaseDataService, IOwnerDataService
 
         try
         {
-            var command = _mapper.Map<RegisterOwnerRequest>(ownerViewModel);
+            var command = new RegisterOwnerRequest(ownerViewModel.Name, ownerViewModel.Email, ownerViewModel.PhoneNumber, ownerViewModel.Address);
             var httpResponse = await _httpClient.PostAsJsonAsync("/api/owners", command);
 
             if (httpResponse.IsSuccessStatusCode)
@@ -68,7 +68,7 @@ public class OwnerDataService : BaseDataService, IOwnerDataService
 
         try
         {
-            var command = _mapper.Map<UpdateOwnerContactRequest>(ownerViewModel);
+            var command = new UpdateOwnerContactRequest(ownerViewModel.Email, ownerViewModel.PhoneNumber, ownerViewModel.Address);
             var httpResponse = await _httpClient.PutAsJsonAsync(
                 $"/api/owners/{ownerViewModel.OwnerId}/contact", command);
 
