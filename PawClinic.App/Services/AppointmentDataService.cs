@@ -1,6 +1,7 @@
 using AutoMapper;
 using Blazored.LocalStorage;
 using PawClinic.App.Contracts;
+using PawClinic.App.Profiles;
 using PawClinic.App.Services.Base;
 using PawClinic.App.ViewModels;
 using System.Net.Http.Json;
@@ -21,7 +22,7 @@ public class AppointmentDataService : BaseDataService, IAppointmentDataService
     {
         await AddBearerToken();
 
-        var appointments = await _httpClient.GetFromJsonAsync<List<AppointmentListDto>>("/api/appointments/upcoming");
+        var appointments = await _httpClient.GetFromJsonAsync<List<Mappings.AppointmentListDto>>("/api/appointments/upcoming");
         if (appointments is null)
             return new List<AppointmentListViewModel>();
 
@@ -32,19 +33,11 @@ public class AppointmentDataService : BaseDataService, IAppointmentDataService
     {
         await AddBearerToken();
 
-        var appointments = await _httpClient.GetFromJsonAsync<List<AppointmentListDto>>(
+        var appointments = await _httpClient.GetFromJsonAsync<List<Mappings.AppointmentListDto>>(
             $"/api/appointments/history/{petId}");
         if (appointments is null)
             return new List<AppointmentListViewModel>();
 
         return _mapper.Map<List<AppointmentListViewModel>>(appointments);
     }
-
-    private record AppointmentListDto(
-        Guid AppointmentId,
-        DateTime ScheduledDateTime,
-        string ReasonForVisit,
-        int Status,
-        string PetName,
-        string VetName);
 }

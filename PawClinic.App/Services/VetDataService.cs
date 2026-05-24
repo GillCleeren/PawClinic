@@ -1,6 +1,7 @@
 using AutoMapper;
 using Blazored.LocalStorage;
 using PawClinic.App.Contracts;
+using PawClinic.App.Profiles;
 using PawClinic.App.Services.Base;
 using PawClinic.App.ViewModels;
 using System.Net.Http.Json;
@@ -21,12 +22,10 @@ public class VetDataService : BaseDataService, IVetDataService
     {
         await AddBearerToken();
 
-        var vets = await _httpClient.GetFromJsonAsync<List<VetListDto>>("/api/vets");
+        var vets = await _httpClient.GetFromJsonAsync<List<Mappings.VetListDto>>("/api/vets");
         if (vets is null)
             return new List<VetViewModel>();
 
         return _mapper.Map<List<VetViewModel>>(vets);
     }
-
-    private record VetListDto(Guid VetId, string Name, int Specialisation);
 }
