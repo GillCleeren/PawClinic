@@ -35,7 +35,7 @@ public class OwnerDataService : BaseDataService, IOwnerDataService
     {
         await AddBearerToken();
 
-        var response = await _httpClient.GetFromJsonAsync<OwnerDetailResponse>($"/api/owners/{id}");
+        var response = await _httpClient.GetFromJsonAsync<Mappings.OwnerDetailDto>($"/api/owners/{id}");
         return response is null ? null : _mapper.Map<OwnerViewModel>(response);
     }
 
@@ -88,7 +88,6 @@ public class OwnerDataService : BaseDataService, IOwnerDataService
 
     // Local DTOs matching the API response shape
     private record PagedOwnerListResponse(List<Mappings.OwnerListDto> Owners, int TotalCount, int Page, int Size);
-    private record OwnerDetailResponse(Guid OwnerId, string Name, string Email, string PhoneNumber, string Address, List<object> Pets);
     private record RegisterOwnerRequest(string Name, string Email, string PhoneNumber, string Address);
     private record UpdateOwnerContactRequest(string Email, string PhoneNumber, string Address);
 }
