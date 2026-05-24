@@ -22,4 +22,15 @@ public partial class OwnerDetail
     {
         Owner = await OwnerDataService.GetOwnerById(OwnerId);
     }
+
+    public string GetSpeciesEmoji(string? species) => (species ?? "").ToLower() switch {
+        "dog"     => "🐕",
+        "cat"     => "🐈",
+        "bird"    => "🐦",
+        "rabbit"  => "🐇",
+        "hamster" => "🐹",
+        "fish"    => "🐟",
+        "turtle"  => "🐢",
+        _         => "🐾"
+    };
 }

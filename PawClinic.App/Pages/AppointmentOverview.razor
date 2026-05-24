@@ -1,40 +1,52 @@
 @page "/appointments"
 
-<h3>Upcoming Appointments</h3>
-
-<br />
+<div class="page-header">
+    <span style="font-size:1.6rem">📅</span>
+    <h3>Upcoming Appointments</h3>
+</div>
 
 @if (Appointments == null)
 {
-    <p><em>Loading...</em></p>
+    <div class="loading-paw">
+        <div>🐶</div>
+        <p>Loading appointments…</p>
+    </div>
 }
 else if (!Appointments.Any())
 {
-    <p>No upcoming appointments found.</p>
+    <div class="card p-4 text-center text-muted">
+        <div style="font-size:3rem">🐾</div>
+        <p class="mt-2 mb-0">No upcoming appointments scheduled.</p>
+    </div>
 }
 else
 {
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Date &amp; Time</th>
-                <th>Pet</th>
-                <th>Vet</th>
-                <th>Reason</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var appt in Appointments)
-            {
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@appt.ScheduledDateTime.ToString("g")</td>
-                    <td>@appt.PetName</td>
-                    <td>@appt.VetName</td>
-                    <td>@appt.ReasonForVisit</td>
-                    <td>@appt.Status</td>
+                    <th>🗓 Date &amp; Time</th>
+                    <th>🐾 Pet</th>
+                    <th>🩺 Vet</th>
+                    <th>Reason</th>
+                    <th>Status</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var appt in Appointments)
+                {
+                    <tr>
+                        <td>@appt.ScheduledDateTime.ToString("g")</td>
+                        <td><strong>@appt.PetName</strong></td>
+                        <td>@appt.VetName</td>
+                        <td>@appt.ReasonForVisit</td>
+                        <td>
+                            <span class="badge-status @GetStatusClass(appt.Status)">@appt.Status</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
+

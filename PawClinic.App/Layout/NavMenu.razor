@@ -1,25 +1,28 @@
-<div class="sidebar">
-    <div class="menu list-group list-group-flush">
-        <AuthorizeView>
-            <Authorized>
-                <NavLink class="list-group-item list-group-item-action" href="/" Match="NavLinkMatch.All">
-                    Home
-                </NavLink>
-                <NavLink class="list-group-item list-group-item-action" href="/owners">
-                    Owners
-                </NavLink>
-                <NavLink class="list-group-item list-group-item-action" href="/appointments">
-                    Appointments
-                </NavLink>
-            </Authorized>
-            <NotAuthorized>
-                <NavLink class="list-group-item list-group-item-action" href="/login">
-                    Login
-                </NavLink>
-                <NavLink class="list-group-item list-group-item-action" href="/register">
-                    Register
-                </NavLink>
-            </NotAuthorized>
-        </AuthorizeView>
-    </div>
-</div>
+<nav class="nav-menu px-2 py-3">
+    <AuthorizeView>
+        <Authorized>
+            <NavLink class="nav-item" href="/" Match="NavLinkMatch.All">
+                <span class="nav-icon">🏠</span>
+                <span>Home</span>
+            </NavLink>
+            <NavLink class="nav-item" href="/owners">
+                <span class="nav-icon">🐾</span>
+                <span>Owners</span>
+            </NavLink>
+            <NavLink class="nav-item" href="/appointments">
+                <span class="nav-icon">📅</span>
+                <span>Appointments</span>
+            </NavLink>
+        </Authorized>
+        <NotAuthorized>
+            <NavLink class="nav-item" href="/login">
+                <span class="nav-icon">🔑</span>
+                <span>Login</span>
+            </NavLink>
+            <NavLink class="nav-item" href="/register">
+                <span class="nav-icon">✏️</span>
+                <span>Register</span>
+            </NavLink>
+        </NotAuthorized>
+    </AuthorizeView>
+</nav>

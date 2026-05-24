@@ -1,36 +1,41 @@
 @page "/owners/add"
 
-<h3>Register New Owner</h3>
-
-<br />
+<div class="page-header">
+    <span style="font-size:1.6rem">🐾</span>
+    <h3>Register New Owner</h3>
+</div>
 
 <div class="row">
-    <div class="card col-12 col-lg-6 p-3">
-        <div class="card-body">
-            <EditForm Model="@OwnerViewModel" OnValidSubmit="HandleValidSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
+    <div class="col-12 col-lg-6">
+        <div class="card p-1">
+            <div class="card-body">
+                <EditForm Model="@OwnerViewModel" OnValidSubmit="HandleValidSubmit">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
 
-                <div class="mb-3">
-                    <label class="form-label" for="name">Name:</label>
-                    <InputText id="name" class="form-control" @bind-Value="OwnerViewModel.Name" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="email">Email:</label>
-                    <InputText id="email" class="form-control" @bind-Value="OwnerViewModel.Email" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="phone">Phone Number:</label>
-                    <InputText id="phone" class="form-control" @bind-Value="OwnerViewModel.PhoneNumber" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="address">Address:</label>
-                    <InputText id="address" class="form-control" @bind-Value="OwnerViewModel.Address" />
-                </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" for="name">Full Name</label>
+                        <InputText id="name" class="form-control" placeholder="Jane Doe" @bind-Value="OwnerViewModel.Name" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" for="email">Email address</label>
+                        <InputText id="email" class="form-control" placeholder="jane@example.com" @bind-Value="OwnerViewModel.Email" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" for="phone">Phone Number</label>
+                        <InputText id="phone" class="form-control" placeholder="+1 (555) 000-0000" @bind-Value="OwnerViewModel.PhoneNumber" />
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold" for="address">Address</label>
+                        <InputText id="address" class="form-control" placeholder="123 Main St, Springfield" @bind-Value="OwnerViewModel.Address" />
+                    </div>
 
-                <button type="submit" class="btn btn-primary">Register Owner</button>
-                <a href="/owners" class="btn btn-secondary ms-2">Cancel</a>
-            </EditForm>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">🐾 Register Owner</button>
+                        <a href="/owners" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </EditForm>
+            </div>
         </div>
     </div>
 </div>

@@ -1,42 +1,53 @@
 @page "/owners"
 
-<h3>Owner Overview</h3>
+<div class="page-header">
+    <span style="font-size:1.6rem">🐾</span>
+    <h3>Pet Owners</h3>
+</div>
 
-<br />
-
-<a href="/owners/add" class="btn btn-primary mb-3">Register New Owner</a>
+<a href="/owners/add" class="btn btn-primary mb-4">
+    ➕ Register New Owner
+</a>
 
 @if (Owners == null)
 {
-    <p><em>Loading...</em></p>
+    <div class="loading-paw">
+        <div>🐶</div>
+        <p>Loading owners…</p>
+    </div>
 }
 else if (!Owners.Any())
 {
-    <p>No owners found.</p>
+    <div class="card p-4 text-center text-muted">
+        <div style="font-size:3rem">🐾</div>
+        <p class="mt-2 mb-0">No owners registered yet. Add the first one!</p>
+    </div>
 }
 else
 {
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var owner in Owners)
-            {
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@owner.Name</td>
-                    <td>@owner.Email</td>
-                    <td>@owner.PhoneNumber</td>
-                    <td>
-                        <a href="/owners/@owner.OwnerId" class="btn btn-sm btn-outline-primary">View</a>
-                    </td>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var owner in Owners)
+                {
+                    <tr>
+                        <td><strong>@owner.Name</strong></td>
+                        <td>@owner.Email</td>
+                        <td>@owner.PhoneNumber</td>
+                        <td>
+                            <a href="/owners/@owner.OwnerId" class="btn btn-sm btn-outline-primary">View 🐾</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }

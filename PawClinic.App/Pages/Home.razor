@@ -1,27 +1,39 @@
-﻿@page "/"
+@page "/"
 
-<PageTitle>PawClinic</PageTitle>
+<PageTitle>PawClinic — Veterinary Management</PageTitle>
 
-<h1>Welcome to PawClinic</h1>
+<div class="hero-section">
+    <h1>Welcome to PawClinic 🐾</h1>
+    <p>Caring for every paw, claw, and tail — all in one place.</p>
+</div>
 
-<p>Manage your veterinary clinic with ease.</p>
-
-<div class="row mt-4">
+<div class="row g-4">
     <div class="col-md-4">
-        <div class="card">
+        <div class="card feature-card h-100">
             <div class="card-body">
-                <h5 class="card-title">Owners</h5>
-                <p class="card-text">View and manage pet owners.</p>
-                <a href="/owners" class="btn btn-primary">Go to Owners</a>
+                <span class="feature-icon">🐕</span>
+                <h5 class="card-title">Pet Owners</h5>
+                <p class="card-text text-muted">Register and manage pet owners, view their furry family members, and keep contact info up to date.</p>
+                <a href="/owners" class="btn btn-primary mt-2">Go to Owners</a>
             </div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card">
+        <div class="card feature-card h-100">
             <div class="card-body">
+                <span class="feature-icon">📅</span>
                 <h5 class="card-title">Appointments</h5>
-                <p class="card-text">View upcoming appointments.</p>
-                <a href="/appointments" class="btn btn-primary">Go to Appointments</a>
+                <p class="card-text text-muted">Track upcoming vet visits, check-ups, and procedures. Never miss a scheduled appointment.</p>
+                <a href="/appointments" class="btn btn-primary mt-2">Go to Appointments</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card feature-card h-100">
+            <div class="card-body">
+                <span class="feature-icon">🩺</span>
+                <h5 class="card-title">Clinic Care</h5>
+                <p class="card-text text-muted">From puppies to seniors — PawClinic keeps your team organized and every patient well cared for.</p>
             </div>
         </div>
     </div>

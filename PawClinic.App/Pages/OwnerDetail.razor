@@ -1,52 +1,91 @@
 @page "/owners/{OwnerId:guid}"
 
-<h3>Owner Detail</h3>
-
-<br />
+<div class="page-header">
+    <span style="font-size:1.6rem">🐾</span>
+    <h3>Owner Detail</h3>
+</div>
 
 @if (Owner == null)
 {
-    <p><em>Loading...</em></p>
+    <div class="loading-paw">
+        <div>🐶</div>
+        <p>Loading owner details…</p>
+    </div>
 }
 else
 {
     <div class="card mb-4">
-        <div class="card-body">
-            <h5 class="card-title">@Owner.Name</h5>
-            <p class="card-text"><strong>Email:</strong> @Owner.Email</p>
-            <p class="card-text"><strong>Phone:</strong> @Owner.PhoneNumber</p>
-            <p class="card-text"><strong>Address:</strong> @Owner.Address</p>
+        <div class="card-body d-flex gap-3 align-items-start">
+            <div class="owner-card">
+                <div class="owner-avatar">🧑</div>
+            </div>
+            <div class="flex-grow-1">
+                <h5 class="card-title mb-1" style="font-weight:700;color:var(--paw-green-900)">@Owner.Name</h5>
+                <p class="card-text mb-1">
+                    <span class="text-muted">📧</span>
+                    <span class="ms-1">@Owner.Email</span>
+                </p>
+                <p class="card-text mb-1">
+                    <span class="text-muted">📞</span>
+                    <span class="ms-1">@Owner.PhoneNumber</span>
+                </p>
+                <p class="card-text mb-0">
+                    <span class="text-muted">📍</span>
+                    <span class="ms-1">@Owner.Address</span>
+                </p>
+            </div>
         </div>
     </div>
 
-    <h4>Pets</h4>
+    <div class="page-header mt-2">
+        <span style="font-size:1.4rem">🐕</span>
+        <h4 style="margin:0;font-weight:700;color:var(--paw-green-900)">Pets</h4>
+    </div>
 
     @if (!Pets.Any())
     {
-        <p>No pets registered for this owner.</p>
+        <div class="card p-4 text-center text-muted">
+            <div style="font-size:2.5rem">🐾</div>
+            <p class="mt-2 mb-0">No pets registered for this owner yet.</p>
+        </div>
     }
     else
     {
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Species</th>
-                    <th>Breed</th>
-                    <th>Archived</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var pet in Pets)
-                {
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>@pet.Name</td>
-                        <td>@pet.Species</td>
-                        <td>@pet.Breed</td>
-                        <td>@(pet.IsArchived ? "Yes" : "No")</td>
+                        <th>Pet</th>
+                        <th>Species</th>
+                        <th>Breed</th>
+                        <th>Status</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var pet in Pets)
+                    {
+                        <tr>
+                            <td><strong>@pet.Name</strong></td>
+                            <td>
+                                <span class="pet-species-icon">@GetSpeciesEmoji(pet.Species)</span>
+                                @pet.Species
+                            </td>
+                            <td>@pet.Breed</td>
+                            <td>
+                                @if (pet.IsArchived)
+                                {
+                                    <span class="badge-status badge-cancelled">Archived</span>
+                                }
+                                else
+                                {
+                                    <span class="badge-status badge-scheduled">Active</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     }
 }
+

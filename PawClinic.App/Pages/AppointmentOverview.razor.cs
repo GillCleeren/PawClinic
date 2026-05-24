@@ -18,4 +18,13 @@ public partial class AppointmentOverview
     {
         Appointments = await AppointmentDataService.GetUpcomingAppointments();
     }
+
+    public string GetStatusClass(string? status) => (status ?? "").ToLower() switch {
+        "scheduled"   => "badge-scheduled",
+        "completed"   => "badge-completed",
+        "cancelled"   => "badge-cancelled",
+        "in progress" => "badge-inprogress",
+        "inprogress"  => "badge-inprogress",
+        _             => "badge-scheduled"
+    };
 }

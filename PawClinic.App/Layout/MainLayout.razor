@@ -1,17 +1,22 @@
-﻿@inherits LayoutComponentBase
+@inherits LayoutComponentBase
 
-<div class="container-fluid">
-    <header class="py-3 mb-3 border-bottom">
-        <h1 class="h4 mb-0">PawClinic</h1>
-    </header>
-
-    <div class="d-flex">
+<div class="page">
+    <div class="sidebar">
+        <div class="app-header">
+            <span class="brand-icon">🐾</span>
+            <div>
+                <p class="brand-name">PawClinic</p>
+                <p class="brand-tagline">Veterinary Management</p>
+            </div>
+        </div>
         <NavMenu />
+    </div>
 
-        <div class="content flex-grow-1 p-3">
+    <main>
+        <div class="content px-4 py-3">
             @Body
         </div>
-    </div>
+    </main>
 </div>
 
 <div id="blazor-error-ui">
