@@ -11,7 +11,8 @@ namespace PawClinic.Api.Endpoints
         public static void MapPetEndpoints(this IEndpointRouteBuilder app)
         {
             var group = app.MapGroup("/api/pets")
-                .WithTags("Pets");
+                .WithTags("Pets")
+                .RequireAuthorization();
 
             group.MapGet("/{id:guid}", GetPetById)
                 .WithName("GetPetById");
@@ -23,8 +24,7 @@ namespace PawClinic.Api.Endpoints
                 .WithName("AddPet");
 
             group.MapPut("/{id:guid}/archive", ArchivePet)
-                .WithName("ArchivePet")
-                .RequireAuthorization();
+                .WithName("ArchivePet");
         }
 
         private static async Task<IResult> GetPetById(Guid id, IMediator mediator)

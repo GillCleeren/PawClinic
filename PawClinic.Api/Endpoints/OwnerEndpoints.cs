@@ -12,7 +12,8 @@ namespace PawClinic.Api.Endpoints
         public static void MapOwnerEndpoints(this IEndpointRouteBuilder app)
         {
             var group = app.MapGroup("/api/owners")
-                .WithTags("Owners");
+                .WithTags("Owners")
+                .RequireAuthorization();
 
             group.MapGet("/", GetAllOwners)
                 .WithName("GetAllOwners");
@@ -24,8 +25,7 @@ namespace PawClinic.Api.Endpoints
                 .WithName("RegisterOwner");
 
             group.MapPut("/{id:guid}/contact", UpdateOwnerContact)
-                .WithName("UpdateOwnerContact")
-                .RequireAuthorization();
+                .WithName("UpdateOwnerContact");
         }
 
         private static async Task<IResult> GetAllOwners(

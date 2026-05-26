@@ -10,7 +10,8 @@ namespace PawClinic.Api.Endpoints
         public static void MapVetEndpoints(this IEndpointRouteBuilder app)
         {
             var group = app.MapGroup("/api/vets")
-                .WithTags("Vets");
+                .WithTags("Vets")
+                .RequireAuthorization();
 
             group.MapGet("/", GetAllVets)
                 .WithName("GetAllVets");

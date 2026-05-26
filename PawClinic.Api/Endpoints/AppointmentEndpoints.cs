@@ -14,7 +14,8 @@ namespace PawClinic.Api.Endpoints
         public static void MapAppointmentEndpoints(this IEndpointRouteBuilder app)
         {
             var group = app.MapGroup("/api/appointments")
-                .WithTags("Appointments");
+                .WithTags("Appointments")
+                .RequireAuthorization();
 
             group.MapGet("/{id:guid}", GetAppointmentById)
                 .WithName("GetAppointmentById");
@@ -29,12 +30,10 @@ namespace PawClinic.Api.Endpoints
                 .WithName("ScheduleAppointment");
 
             group.MapPut("/{id:guid}/cancel", CancelAppointment)
-                .WithName("CancelAppointment")
-                .RequireAuthorization();
+                .WithName("CancelAppointment");
 
             group.MapPut("/{id:guid}/complete", CompleteAppointment)
-                .WithName("CompleteAppointment")
-                .RequireAuthorization();
+                .WithName("CompleteAppointment");
         }
 
         private static async Task<IResult> GetAppointmentById(Guid id, IMediator mediator)
