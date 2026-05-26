@@ -13,6 +13,9 @@ public partial class OwnerDetail
     public IOwnerDataService OwnerDataService { get; set; } = default!;
 
     [Inject]
+    public IPetDataService PetDataService { get; set; } = default!;
+
+    [Inject]
     public NavigationManager NavigationManager { get; set; } = default!;
 
     public OwnerViewModel? Owner { get; set; }
@@ -21,6 +24,7 @@ public partial class OwnerDetail
     protected override async Task OnInitializedAsync()
     {
         Owner = await OwnerDataService.GetOwnerById(OwnerId);
+        Pets = await PetDataService.GetPetsByOwner(OwnerId);
     }
 
     public string GetSpeciesEmoji(string? species) => (species ?? "").ToLower() switch {

@@ -29,6 +29,7 @@ builder.Services.AddScoped(sp =>
 builder.Services.AddScoped<IOwnerDataService, OwnerDataService>();
 builder.Services.AddScoped<IVetDataService, VetDataService>();
 builder.Services.AddScoped<IAppointmentDataService, AppointmentDataService>();
+builder.Services.AddScoped<IPetDataService, PetDataService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 await builder.Build().RunAsync();

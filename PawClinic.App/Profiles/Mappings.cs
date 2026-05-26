@@ -23,7 +23,20 @@ public class Mappings : Profile
         CreateMap<AppointmentListDto, AppointmentListViewModel>()
             .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
             .ReverseMap();
+
+        // Pet mappings
+        CreateMap<PetListDto, PetViewModel>()
+            .ForMember(dest => dest.Species, opt => opt.MapFrom(src => SpeciesName(src.Species)));
     }
+
+    private static string SpeciesName(int value) => value switch
+    {
+        0 => "Dog",
+        1 => "Cat",
+        2 => "Rabbit",
+        3 => "Bird",
+        _ => "Other"
+    };
 
     // Internal DTOs matching the API JSON response shapes
     public record OwnerListDto(Guid OwnerId, string Name, string Email, string PhoneNumber);
@@ -36,4 +49,5 @@ public class Mappings : Profile
         int Status,
         string PetName,
         string VetName);
+    public record PetListDto(Guid PetId, string Name, int Species, string? Breed, bool IsArchived);
 }
