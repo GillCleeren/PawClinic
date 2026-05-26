@@ -19,11 +19,32 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
         var savedToken = await _localStorage.GetItemAsync<string>("token");
 
         if (string.IsNullOrWhiteSpace(savedToken))
+            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
+
+        if (IsTokenExpired(savedToken))
         {
+            await _localStorage.RemoveItemAsync("token");
             return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
         }
 
         return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseTokenClaims(savedToken), "jwt")));
+    }
+
+    private static bool IsTokenExpired(string jwt)
+    {
+        try
+        {
+            var payload = jwt.Split('.')[1];
+            var jsonBytes = ParseBase64WithoutPadding(payload);
+            var claims = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(jsonBytes);
+            if (claims != null && claims.TryGetValue("exp", out var expElement))
+            {
+                var exp = expElement.GetInt64();
+                return DateTimeOffset.FromUnixTimeSeconds(exp).UtcDateTime <= DateTime.UtcNow;
+            }
+        }
+        catch { }
+        return false;
     }
 
     public void SetUserAuthenticated(string email)

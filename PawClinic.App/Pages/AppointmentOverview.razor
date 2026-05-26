@@ -3,6 +3,7 @@
 <div class="page-header">
     <span style="font-size:1.6rem">📅</span>
     <h3>Upcoming Appointments</h3>
+    <a href="/appointments/schedule" class="btn btn-primary btn-sm ms-auto">+ Schedule</a>
 </div>
 
 @if (Appointments == null)
@@ -30,6 +31,7 @@ else
                     <th>🩺 Vet</th>
                     <th>Reason</th>
                     <th>Status</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +44,9 @@ else
                         <td>@appt.ReasonForVisit</td>
                         <td>
                             <span class="badge-status @GetStatusClass(appt.Status)">@appt.Status</span>
+                        </td>
+                        <td>
+                            <a href="/appointments/@appt.AppointmentId" class="btn btn-outline-secondary btn-sm">View</a>
                         </td>
                     </tr>
                 }

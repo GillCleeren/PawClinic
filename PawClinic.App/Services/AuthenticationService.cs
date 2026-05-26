@@ -39,8 +39,6 @@ public class AuthenticationService : BaseDataService, IAuthenticationService
 
             await _localStorage.SetItemAsync("token", authResponse.Token);
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).SetUserAuthenticated(loginViewModel.Email);
-            _httpClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", authResponse.Token);
 
             return true;
         }
@@ -79,7 +77,6 @@ public class AuthenticationService : BaseDataService, IAuthenticationService
     {
         await _localStorage.RemoveItemAsync("token");
         ((CustomAuthenticationStateProvider)_authenticationStateProvider).SetUserLoggedOut();
-        _httpClient.DefaultRequestHeaders.Authorization = null;
     }
 
     private record AuthenticationRequest(string Email, string Password);

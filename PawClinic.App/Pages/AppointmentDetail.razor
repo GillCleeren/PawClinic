@@ -1,0 +1,112 @@
+@page "/appointments/{AppointmentId:guid}"
+
+<div class="page-header">
+    <span style="font-size:1.6rem">📅</span>
+    <h3>Appointment Detail</h3>
+    <a href="/appointments" class="btn btn-outline-secondary btn-sm ms-auto">← Back</a>
+</div>
+
+@if (Appointment == null)
+{
+    <div class="loading-paw">
+        <div>🐶</div>
+        <p>Loading appointment…</p>
+    </div>
+}
+else
+{
+    <div class="row g-4">
+        <div class="col-12 col-lg-7">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title mb-3" style="font-weight:700;color:var(--paw-green-900)">Details</h5>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">Date &amp; Time</dt>
+                        <dd class="col-sm-8">@Appointment.ScheduledDateTime.ToString("f")</dd>
+
+                        <dt class="col-sm-4">Pet</dt>
+                        <dd class="col-sm-8">@Appointment.PetName <span class="text-muted">(@Appointment.PetSpecies)</span></dd>
+
+                        <dt class="col-sm-4">Vet</dt>
+                        <dd class="col-sm-8">@Appointment.VetName <span class="text-muted">— @Appointment.VetSpecialisation</span></dd>
+
+                        <dt class="col-sm-4">Reason</dt>
+                        <dd class="col-sm-8">@Appointment.ReasonForVisit</dd>
+
+                        <dt class="col-sm-4">Status</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge-status @GetStatusClass(Appointment.Status)">@Appointment.Status</span>
+                        </dd>
+
+                        @if (!string.IsNullOrWhiteSpace(Appointment.Notes))
+                        {
+                            <dt class="col-sm-4">Notes</dt>
+                            <dd class="col-sm-8">@Appointment.Notes</dd>
+                        }
+                    </dl>
+                </div>
+            </div>
+
+            @if (Appointment.Status == "Scheduled")
+            {
+                <AuthorizeView>
+                    <Authorized>
+                        @if (!ShowCompleteForm && !ShowCancelForm)
+                        {
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-success" @onclick="() => ShowCompleteForm = true">✔ Complete</button>
+                                <button class="btn btn-danger" @onclick="() => ShowCancelForm = true">✖ Cancel Appointment</button>
+                            </div>
+                        }
+
+                        @if (ShowCompleteForm)
+                        {
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <h6 class="fw-semibold mb-3">Complete Appointment</h6>
+                                    <div class="mb-3">
+                                        <label class="form-label">Notes</label>
+                                        <textarea class="form-control" rows="3" placeholder="Add consultation notes…"
+                                            @bind="CompletionNotes"></textarea>
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-success" @onclick="HandleComplete">Confirm Complete</button>
+                                        <button class="btn btn-outline-secondary" @onclick="() => ShowCompleteForm = false">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        @if (ShowCancelForm)
+                        {
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <h6 class="fw-semibold mb-3">Cancel Appointment</h6>
+                                    <div class="mb-3">
+                                        <label class="form-label">Reason <span class="text-muted fw-normal">(optional)</span></label>
+                                        <input type="text" class="form-control" placeholder="Reason for cancellation…"
+                                            @bind="CancelReason" />
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-danger" @onclick="HandleCancel">Confirm Cancel</button>
+                                        <button class="btn btn-outline-secondary" @onclick="() => ShowCancelForm = false">Back</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </Authorized>
+                    <NotAuthorized>
+                        <div class="alert alert-warning mt-3">
+                            Please <a href="/login">log in</a> to cancel or complete appointments.
+                        </div>
+                    </NotAuthorized>
+                </AuthorizeView>
+            }
+
+            @if (!string.IsNullOrEmpty(ErrorMessage))
+            {
+                <div class="alert alert-danger mt-3">@ErrorMessage</div>
+            }
+        </div>
+    </div>
+}

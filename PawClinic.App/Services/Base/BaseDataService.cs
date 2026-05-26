@@ -25,12 +25,5 @@ public abstract class BaseDataService
         return new ApiResponse<T> { Message = message, Success = false };
     }
 
-    protected async Task AddBearerToken()
-    {
-        if (await _localStorage.ContainKeyAsync("token"))
-        {
-            _httpClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", await _localStorage.GetItemAsync<string>("token"));
-        }
-    }
+    protected Task AddBearerToken() => Task.CompletedTask;
 }
