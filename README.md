@@ -111,7 +111,7 @@ dotnet test
 ## API endpoints
 
 All endpoints except `/api/account/*` require a valid JWT bearer token.  
-Include the token in the `Authorization` header: `******
+Include the token in the `Authorization` header: `Authorization: ******
 
 ### Account
 
